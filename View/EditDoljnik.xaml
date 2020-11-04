@@ -1,0 +1,25 @@
+﻿<Window x:Class="Doljniki.View.EditDoljnik"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Doljniki.View"
+        mc:Ignorable="d"
+        Title="EditDoljnik" Height="250" Width="400">
+    <StackPanel>
+        <StackPanel Margin="10" DataContext="{Binding SelectedMraz}">
+            <TextBlock HorizontalAlignment="Center" FontSize="18" Text="Сумма долга"></TextBlock>
+            <TextBox Text="{Binding Sum, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+        </StackPanel>
+        <Grid Margin="10" Height="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="accept" Grid.Column="0" IsDefault="True" Command="{Binding AcceptCommand}"
+                    CommandParameter="{Binding RelativeSource={
+                    RelativeSource AncestorType={x:Type Window}}}">Добавить</Button>
+            <Button Grid.Column="1" IsCancel="True">Отмена</Button>
+        </Grid>
+    </StackPanel>
+</Window>

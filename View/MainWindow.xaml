@@ -1,0 +1,52 @@
+﻿<Window x:Class="Doljniki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Doljniki"
+        mc:Ignorable="d"
+        Title="Должники" Height="800" Width="600">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontSize" Value="14" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.2*" />
+        </Grid.RowDefinitions>
+        <Menu Grid.ColumnSpan="2" >
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть" Command="{Binding OpenCommand}" />
+                <MenuItem Header="Сохранить" Command="{Binding SaveCommand}"/>
+            </MenuItem>
+        </Menu>
+        <ListBox Grid.Row="1" ItemsSource="{Binding Mrazi}" SelectedItem="{Binding SelectedMraz}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5">
+                        <TextBlock FontSize="18" Text="{Binding StringFormat=Имя: {0}, Path=Name}"/>
+                        <TextBlock Text="{Binding StringFormat=Долг: {0} рублей, Path=Sum}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Command="{Binding AddCommand}">Добавить должника</Button>
+            <Button Grid.Column="1" Command="{Binding EditCommand}"
+                           CommandParameter="{Binding SelectedMraz}">Изменить сумму долга</Button>
+            <Button Grid.Column="2" Command="{Binding RemoveCommand}"
+                           CommandParameter="{Binding SelectedMraz}">Удалить должника</Button>
+        </Grid>
+    </Grid>
+</Window>
